@@ -14,11 +14,11 @@ defaults:
     values:
       image: true
 
-title: Minimalism
-name: minimalism
-description: Minimalism is a jekyll theme for minimalist
+title: 候鸟2020
+name: 数据分析成长记录
+description: 一个腾讯的数据分析的博客
 
-github: https://github.com/showzeng/Minimalism
+github: https://github.com/maolilai/maolilai.github.io
 rss: true
 
 plugins:
