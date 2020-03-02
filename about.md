@@ -4,7 +4,7 @@ title: 关于
 reward: false
 ---
 
-### Minimalism
+### 博客内容说明
 
 ---
 
