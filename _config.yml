@@ -14,9 +14,9 @@ defaults:
     values:
       image: true
 
-title: 候鸟2020
-name: 数据分析成长记录
-description: 一个腾讯的数据分析的博客
+title: 数据分析
+name: 大数据分析开发成长记录
+description: 一个数据分析开发同学的博客
 
 github: https://github.com/maolilai/maolilai.github.io
 rss: true
