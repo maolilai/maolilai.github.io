@@ -10,7 +10,7 @@
     </div>
 
     {% if site.reward and site.reward == true %}
-    {% unless page.reward != null and page.reward == false %}
+    <!-- {% unless page.reward != null and page.reward == false %} -->
     <div class="reward">
       <hr>
       <div class="reward-qr-code" style="display: none">
@@ -37,13 +37,13 @@
         <div onclick="showReward()">赏</div>
       </div>
     </div>
-    {% endunless %}
+    <!-- {% endunless %} -->
     {% endif %}
 
     {% if site.comment and site.comment == true %}
     {% unless page.comment != null and page.comment == false %}
 
-      {% if site.gitment_client_id and site.gitment_secret %}
+      <!-- {% if site.gitment_client_id and site.gitment_secret %} -->
       <hr>
       <div id="btn-show-comment">
         <div onclick="showComment()">显示评论</div>
@@ -68,12 +68,12 @@
           }
 
           const gitment = new Gitment({
-            id: '{{ page.date }}',
-            owner: '{{ site.gitment_owner }}',
-            repo: '{{ site.gitment_repo }}',
+            id: '<%= page.date %>',
+            owner: 'maolilai',
+            repo: 'https://github.com/maolilai/comments',
             oauth: {
-              client_id: '{{ site.gitment_client_id }}',
-              client_secret: '{{ site.gitment_secret }}',
+              client_id: 'a5bff4405a39356a082f',
+              client_secret: 'aec3e919f4783e4d09dce33970debc8bb039f902',
             },
             theme: myTheme,
           })
@@ -82,7 +82,7 @@
         </script>
         <!-- gitment 代码 -->
       </div>
-      {% endif %}
+      <!-- {% endif %} -->
 
       {% if site.livere_uid %}
       <hr>
@@ -112,7 +112,21 @@
       {% endif %}
     {% endunless %}
     {% endif %}
-
+	
+	<div id="gitmentContainer"></div>
+		<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+		<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+		<script>
+		var gitment = new Gitment({
+			owner: 'maolilai',
+			repo: 'https://github.com/maolilai/comments',
+			oauth: {
+				client_id: 'a5bff4405a39356a082f',
+				client_secret: 'aec3e919f4783e4d09dce33970debc8bb039f902',
+			},
+		});
+		gitment.render('gitmentContainer');
+		</script>
     <script>
       function showComment() {
         if(document.getElementById("comment").style.display=="none") {
