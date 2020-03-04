@@ -21,6 +21,13 @@ description: 一个数据分析开发同学的博客
 github: https://github.com/maolilai/maolilai.github.io
 rss: true
 
+comment_gitment_repo: maolilai.github.io
+comment_gitment_clientId: a5bff4405a39356a082f
+comment_gitment_clientSecret: aec3e919f4783e4d09dce33970debc8bb039f902
+
+gitment_client_id: a5bff4405a39356a082f
+site.gitment_secret: aec3e919f4783e4d09dce33970debc8bb039f902
+
 plugins:
   - rouge
   - kramdown
