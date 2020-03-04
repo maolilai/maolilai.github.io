@@ -41,7 +41,7 @@
       </p>
 
       <div class="article-title-description">
-        <p>发表于 {{ page.date | date: "%Y-%m-%d" }} | 本文共 {{ page.content | number_of_words }} 字</p>
+        <p>发表于 {{ page.date | date: "%Y-%m-%d" }} | from maolilai </p>
       </div>
     </header>
 
@@ -67,5 +67,22 @@
     {% endif %}
 
     {% include statistics_body.html %}
+	
+	<div id="gitmentContainer"></div>
+		<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+		<script src="https://www.wenjunjiang.win/js/gitment.js"></script>
+		<script>
+		var gitment = new Gitment({
+			owner: 'maolilai',
+			repo: 'https://github.com/maolilai/comments',
+			oauth: {
+				client_id: 'a5bff4405a39356a082f',
+				client_secret: 'aec3e919f4783e4d09dce33970debc8bb039f902',
+			},
+		});
+		gitment.render('gitmentContainer');
+		</script>
   </body>
+  
+  
 </html>
