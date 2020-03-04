@@ -51,8 +51,8 @@
       <div id="comment" style="display: none">
         <!-- gitment 代码 -->
         <div id="container"></div>
-        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+        <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+		<script src="https://www.wenjunjiang.win/js/gitment.js"></script>
         <script>
           const myTheme = {
             render(state, instance) {
@@ -68,7 +68,7 @@
           }
 
           const gitment = new Gitment({
-            id: '<%= page.date %>',
+            id: '{{ page.url }}',
             owner: 'maolilai',
             repo: 'https://github.com/maolilai/comments',
             oauth: {
@@ -114,8 +114,8 @@
     {% endif %}
 	
 	<div id="gitmentContainer"></div>
-		<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-		<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+		<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+		<script src="https://www.wenjunjiang.win/js/gitment.js"></script>
 		<script>
 		var gitment = new Gitment({
 			owner: 'maolilai',
