@@ -1,3 +1,6 @@
+<!-- slide -->
+
+
 <section data-markdown>
 
 	    # 震惊！国内某数字消费资讯网站竟提供这种服务
@@ -11,7 +14,7 @@
 	    * 👍 什么是最好的？
 
 	</section>
-	
+<!-- slide vertical=true -->	
 	
 <section data-markdown>
 
@@ -26,3 +29,5 @@
 	    * 👍 什么是最好的？
 
 	</section>	
+<!-- slide -->
+	
