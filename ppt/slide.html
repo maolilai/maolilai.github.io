@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Shuyi Wang">
+  <title>My Beautiful Slide</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reset.css">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">My Beautiful Slide</h1>
+  <p class="author">Shuyi Wang</p>
+  <p class="date">Aug 2019</p>
+</section>
+
+<section><section id="introduction" class="title-slide slide level1"><h1>Introduction</h1></section><section id="welcome" class="slide level2">
+<h2>Welcome</h2>
+<ul>
+<li class="fragment">item 1</li>
+<li class="fragment">item 2</li>
+</ul>
+</section><section id="local-image" class="slide level2">
+<h2>local image</h2>
+</section><section id="section" class="slide level2" data-background-image="assets/2019-01-17-10-20-12-756041.png" data-background-size="contain">
+<h2></h2>
+</section><section id="inline-image" class="slide level2">
+<h2>inline image</h2>
+<ul>
+<li class="fragment">text</li>
+<li class="fragment"><img src="assets/2019-01-17-10-20-12-756041.png" style="border-style: none" alt=""></li>
+</ul>
+</section><section id="web-image" class="slide level2">
+<h2>web image</h2>
+</section><section id="section-1" class="slide level2" data-background-image="assets/2019-08-12-18-46-06-105531.jpg" data-background-size="contain">
+<h2></h2>
+</section><section id="video" class="slide level2">
+<h2>video</h2>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<video class="stretch" src="assets/markdown2slides-intro.mp4" data-autoplay controls>
+</video>
+</section><section id="the-end" class="slide level2">
+<h2>The End</h2>
+<p>Thanks for your time!</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+navigationMode: 'linear', 
+
+        // Push each slide change to the browser history
+        history: true,
+        // Transition style
+        transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
