@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[spark]基于consine函数求相似性"
-date:   2020-03-10 12:16:01
+date:   2020-03-31 12:16:01
 categories: 机器学习
 ---
 # [spark]基于consine函数求相似性
