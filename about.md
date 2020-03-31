@@ -12,5 +12,8 @@ reward: false
 今天开始整理博客了，github真的很方便，把多年前扔掉的东西又捡起来了。
 
 欢迎加我好友！
+<<<<<<< HEAD
 
+=======
+>>>>>>> ca40478c02265e42dbcba120043c382985adee5d
 ![](https://raw.githubusercontent.com/maolilai/maolilai.github.io/master/assets/about-89500486.png)
