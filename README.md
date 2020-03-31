@@ -83,7 +83,7 @@ remote_theme: showzeng/Minimalism
 
 如果主题对你有帮助，并帮你节省了一些折腾的时间，可以考虑打赏，这是对我所做工作的最大肯定。
 
-![reward.png](./docs/reward.webp)
+
 
 ## License
 
