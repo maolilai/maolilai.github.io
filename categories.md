@@ -1,4 +1,4 @@
 ---
 layout: categories
-title: 分类
+title: 知识库
 ---
