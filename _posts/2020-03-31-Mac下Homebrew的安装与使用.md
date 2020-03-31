@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "#Mac下Homebrew的安装与使用"
+title:  "Mac下Homebrew的安装与使用"
 date:   2020-03-31 12:16:01
 categories: 工具
 ---
