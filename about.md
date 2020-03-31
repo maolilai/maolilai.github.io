@@ -15,7 +15,7 @@ reward: false
 
 ##### 2.1 微信公众号：
 
-![](https://raw.githubusercontent.com/maolilai/maolilai.github.io/master/assets/about-8851a1e0.png)
+![](https://raw.githubusercontent.com/maolilai/maolilai.github.io/master/assets/about-c973e59f.png)
 
 
 ##### 2.2个人微信：
