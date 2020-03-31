@@ -19,5 +19,4 @@ reward: false
 
 
 ##### 2.2个人微信：
-
 ![](https://raw.githubusercontent.com/maolilai/maolilai.github.io/master/assets/about-89500486.png)
