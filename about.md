@@ -1,6 +1,6 @@
 ---
 layout: about
-title: 关于
+title: 联系方式
 reward: false
 ---
 
