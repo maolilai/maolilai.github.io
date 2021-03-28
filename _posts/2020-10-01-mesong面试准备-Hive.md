@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Hive面试问题总结"
+date:   2021-01-27 00:10:01
+categories: 面试
+---
+
 # Hive面试问题总结
 
 
@@ -101,14 +108,14 @@ import org.apache.hadoop.mapred.Reporter;
 // MapReduce实现Join操作
 public class MapRedJoin {
     public static final String DELIMITER = "\u0009";  // 字段分隔符
-    
-    
+
+
     // Map过程
     public static class MapClass extends MapReduceBase implements Mapper<LongWritable, Text, Text, Text> {
         public void configure(JobConf job) {
             super.configure(job);
         }
-        
+
         public void map(LongWritable key, Text value, OutputCollector<Text, Text> output, Reporter reporter) throws IOException, ClassCastException {
             // 获取输入文件的全路径和名称
             String filePath = ((FileSplit)reporter.getInputSplit()).getPath().toString();
@@ -117,41 +124,41 @@ public class MapRedJoin {
             // 抛弃空记录
             if (line == null || line.equal(""))
                 return;
-            
+
             // 处理来自表A的记录
             if (filePath.contains("m_ys_lab_jointest_a")) {
                 String[] values = line.split(DELIMITER);  // 按分隔符分割出字段
                 if (values.length < 2)
                     return;
-                
+
                 String id = value[0];  // id
                 String name = value[1];  // name
-                
+
                 output.collect(new Text(id), new Text("a#" + name));  // 给表A的信息打上标签"a#"
             }    
-            
+
             // 处理来自表B的记录
             if (filePath.contains("m_ys_lab_jointest_b")) {
                 String[] values = line.split(DELIMITER);  // 按分隔符分割出字段
                 if (values.length < 3)
                     return;
-                
+
                 String id = values[0];  // id
                 String statyear = values[1];  // statyear
                 String num = values[2];  // num
-                
+
                 output.collect(new Text(id), new Text("#b" + statyear + DELIMITER + num));  // 给表B的信息打上标签"b#"
             }
         }
     }
-    
-    
+
+
     // Reduce过程
     public static class Reduce extends MapReduceBase implements Reducer<Text, Text, Text, Text> {
         public void reduce(Text key, Interator<Text> values, OutputCollector<Text, Text> output, Reporter reporter) throws IOException{
             Vector<String> vecA = new Vector<String>();  // 存放来自表A的数据
             Vector<String> vecB = new Vector<String>();  // 存放来自表B的数据
-            
+
             while (values.hasNext()) {
                 String value = values.next().toString();
                 if (value.startsWith("a#")) {
@@ -160,10 +167,10 @@ public class MapRedJoin {
                     vecB.add(value.substring(2));
                 }
             }
-            
+
             int sizeA = vecA.size();
             int sizeB = vecB.size();
-            
+
             // 遍历两个向量，做笛卡尔积
             int i;
             int j;
@@ -174,8 +181,8 @@ public class MapRedJoin {
             }
         }
     }
-    
-    
+
+
     protected void configJob(JobConf conf) {
         conf.setMapOutputKeyClass(Text.class);
         conf.setMapOutputValueClass(Text.class);
@@ -222,7 +229,7 @@ public class GruopCount extends Configuration implements Tool{
     }
     enum Counter{
         TIMER
-    } 
+    }
     @Override
     public void setConf(Configuration arg0) {
         this.configuration=arg0;
@@ -251,7 +258,7 @@ public class GruopCount extends Configuration implements Tool{
                 return;
             }
         }
-    } 
+    }
     private static class Reduce extends Reducer<Text, DoubleWritable, Text, DoubleWritable>{
 
         @Override
@@ -270,15 +277,15 @@ public class GruopCount extends Configuration implements Tool{
         job.setJarByClass(GruopCount.class);
         FileInputFormat.setInputPaths(job, new Path(arg0[1]));
         FileOutputFormat.setOutputPath(job, new Path(arg0[2]));
-        
+
         //默认即可，若需要进行效率调优使用此代码自定义分片
         //设置要分片的calss
-        //job.setCombinerClass(Reduce.class); 
+        //job.setCombinerClass(Reduce.class);
         //设置分片calss
         //job.setPartitionerClass(SectionPartitioner.class);
         //设置分片个数
         //job.setNumReduceTasks(3);
-        
+
         job.setMapperClass(Map.class);
         job.setReducerClass(Reduce.class);
         job.setOutputFormatClass(TextOutputFormat.class);
@@ -322,22 +329,22 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
- 
+
 public class Dedup {
- 
+
     public static class RemoveDupMapper extends Mapper<Object, Text, Text, NullWritable> {
     	public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
     		context.write(value, NullWritable.get());
     	}
     }
- 
+
     public static class RemoveDupReducer extends Reducer<Text, NullWritable, Text, NullWritable> {
     	public void reduce(Text key, Iterable<NullWritable> values, Context context)
         throws IOException, InterruptedException {
     		context.write(key, NullWritable.get());
     	}
     }
- 
+
     public static void main(String[] args) throws Exception{
         Configuration conf = new Configuration();
         conf.set("mapred.jar","Dedup.jar");   //去掉这行也能运行，目前还不知道这行有什么用
@@ -347,19 +354,19 @@ public class Dedup {
         	System.err.println("Usage: Data Deduplication <in> <out>");
         	System.exit(2);
         }
-        
+
         Job job = new Job(conf, "Data Deduplication");
         job.setJarByClass(Dedup.class);
- 
+
         //设置Map、Combine和Reduce处理类
         job.setMapperClass(RemoveDupMapper.class);
         job.setCombinerClass(RemoveDupReducer.class);
         job.setReducerClass(RemoveDupReducer.class);
- 
+
         //设置输出类型
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(NullWritable.class);
- 
+
         //设置输入和输出目录
         FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
         FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
@@ -377,7 +384,7 @@ public class Dedup {
 - 原因二：业务数据本身的特性，就容易产生数据倾斜。例如电商行业，在618、双11等节假日的数据会较多，而工作日的数据较少；如果按照日期来分区，那么自然就会产生数据倾斜；
 - 原因三：Hive-QL语句造成的数据倾斜。例如group by时维度过小，导致某些Reducer的数据过多；join时某张表的key很集中；count distinct时null等特殊值过多等；
 
- 
+
 ---
 12. Hive的数据倾斜有哪些解决办法？（重点）
 - 参数调节
@@ -673,7 +680,7 @@ public class Dedup {
 
 
 ---
-37. 
+37.
 
 
 ---
@@ -689,7 +696,7 @@ public class Dedup {
     - Split。由于表为空，因此小文件个数为1；
 - Select阶段
     - 按表达式直接输出`1`，字段别名为默认值`_col0`
-    
+
 
 ---
 40. Hive的`select name from user_info limit 10`如何转化为MapReduce程序运行？
@@ -734,4 +741,3 @@ public class Dedup {
 45. Hive-QL中explode和lateral view有什么作用？
 - `explode`用于将一行复杂的array或map结构拆分为多行，属于UDTF函数；例如`select explode(split('a,b,c,d,e', ','))`，输出五行数据；
 - `lateral view`用于与UDTF结合使用，从而生成多列数据，例如与`explode`结合使用；例如`select a, b from test lateval view explode(b) as b`；
-

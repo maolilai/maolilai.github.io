@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Hadoop面试问题总结"
+date:   2021-01-27 00:10:01
+categories: 面试
+---
+
 # Hadoop面试问题总结
 
 
@@ -114,7 +121,7 @@
 
 
 ---
-11. 
+11.
 
 
 
@@ -123,7 +130,7 @@
 
 
 
-1. 
+1.
 
 
 ---
@@ -142,9 +149,9 @@
 
 ```java
 package make.Hadoop.com.four_column;
- 
+
 import java.io.IOException;
- 
+
 import org.apache.Hadoop.conf.Configuration;
 import org.apache.Hadoop.conf.Configured;
 import org.apache.Hadoop.fs.FileSystem;
@@ -159,7 +166,7 @@ import org.apache.Hadoop.MapReduce.lib.input.FileInputFormat;
 import org.apache.Hadoop.MapReduce.lib.output.FileOutputFormat;
 import org.apache.Hadoop.util.Tool;
 import org.apache.Hadoop.util.ToolRunner;
- 
+
 public class four_column extends Configured implements Tool {
 	// 1、自己的map类
 	// 2、继承mapper类，<LongWritable, Text, Text,
@@ -168,34 +175,34 @@ public class four_column extends Configured implements Tool {
 			Mapper<LongWritable, Text, Text, IntWritable> {
 		private IntWritable MapOutputkey = new IntWritable(1);
 		private Text MapOutputValue = new Text();
- 
+
 		@Override
 		protected void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
- 
+
 			String strs = value.toString();
 			// 分割数据
 			String str_four = strs.split(",")[3];
- 
+
 			MapOutputValue.set(str_four);
 			System.out.println(str_four);
 			context.write(MapOutputValue, MapOutputkey);
- 
+
 		}
 	}
 	// 2、自己的reduce类，这里的输入就是map方法的输出
 	public static class MyReduce extends
 			Reducer<Text, IntWritable, Text, IntWritable> {
- 
+
 		IntWritable countvalue = new IntWritable(1);
- 
+
 		@Override
 		// map类的map方法的数据输入到reduce类的group方法中，得到<text,it(1,1)>,再将这个数据输入到reduce方法中
 		protected void reduce(Text inputkey, Iterable<IntWritable> inputvalue,
 				Context context) throws IOException, InterruptedException {
- 
+
 			int sum = 0;
- 
+
 			for (IntWritable i : inputvalue) {
 				System.out.println(i.get());
 				sum = sum + i.get();
@@ -206,29 +213,29 @@ public class four_column extends Configured implements Tool {
 		}
 	}
 	// 3运行类，run方法，在测试的时候使用main函数，调用这个类的run方法来运行
- 
+
 	/**
 	 * param args 参数是接受main方得到的参数，在run中使用
 	 */
 	public int run(String[] args) throws Exception {
- 
+
 		Configuration conf = new Configuration();
- 
+
 		Job job = Job.getInstance(this.getConf(), "four_column");
- 
+
 		// set mainclass
 		job.setJarByClass(four_column.class);
- 
+
 		// set mapper
 		job.setMapperClass(MyMapper.class);
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
- 
+
 		// set reducer
 		job.setReducerClass(MyReduce.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
- 
+
 		// set path
 		Path inpath = new Path(args[0]);
 		FileInputFormat.setInputPaths(job, inpath);
@@ -240,21 +247,21 @@ public class four_column extends Configured implements Tool {
 			fs.delete(outpath, true);
 		}
 		job.setNumReduceTasks(1);
- 
+
 		boolean status = job.waitForCompletion(true);
- 
+
 		if (!status) {
 			System.err.println("the job is error!!");
 		}
- 
+
 		return status ? 0 : 1;
- 
+
 	}
 	public static void main(String[] args) throws IOException,
 			ClassNotFoundException, InterruptedException {
- 
+
 		Configuration conf = new Configuration();
- 
+
 		int atatus;
 		try {
 			atatus = ToolRunner.run(conf, new four_column(), args);
@@ -262,7 +269,7 @@ public class four_column extends Configured implements Tool {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
- 
+
 	}
 }
 ```
@@ -328,7 +335,7 @@ public class four_column extends Configured implements Tool {
 ---
 12. Client客户端读取HDFS文件的顺序流是什么？
 - Client向NameNode发起文件读取的请求；
-- NameNode返回存储该文件的DataNode的信息； 
+- NameNode返回存储该文件的DataNode的信息；
 - Client读取DataNode上的文件信息；
 
 
@@ -369,16 +376,16 @@ public class four_column extends Configured implements Tool {
 
 ---
 18. Hadoop的性能调优有哪些手段？
-调优可以通过系统配置、程序编写和作业调度算法来进行。 
-HDFS的block.size可以调到128/256（网络很好的情况下，默认为64） 
+调优可以通过系统配置、程序编写和作业调度算法来进行。
+HDFS的block.size可以调到128/256（网络很好的情况下，默认为64）
 调优的大头：
-mapred.map.tasks、mapred.reduce.tasks设置mr任务数（默认都是1） 
-mapred.Tasktracker.map.tasks.maximum每台机器上的最大map任务数 
-mapred.Tasktracker.reduce.tasks.maximum每台机器上的最大reduce任务数 
-mapred.reduce.slowstart.completed.maps配置reduce任务在map任务完成到百分之几的时候开始进入 
-这个几个参数要看实际节点的情况进行配置，reduce任务是在33%的时候完成copy，要在这之前完成map任务，（map可以提前完成） 
-mapred.compress.map.output,mapred.output.compress配置压缩项，消耗cpu提升网络和磁盘io 
-合理利用combiner 
+mapred.map.tasks、mapred.reduce.tasks设置mr任务数（默认都是1）
+mapred.Tasktracker.map.tasks.maximum每台机器上的最大map任务数
+mapred.Tasktracker.reduce.tasks.maximum每台机器上的最大reduce任务数
+mapred.reduce.slowstart.completed.maps配置reduce任务在map任务完成到百分之几的时候开始进入
+这个几个参数要看实际节点的情况进行配置，reduce任务是在33%的时候完成copy，要在这之前完成map任务，（map可以提前完成）
+mapred.compress.map.output,mapred.output.compress配置压缩项，消耗cpu提升网络和磁盘io
+合理利用combiner
 注意重用writable对象
 
 
@@ -461,7 +468,7 @@ Set适合经常地随即储存，插入，删除。但是在遍历时效率比�
 ---
 32. 用MapReduce实现sql语句：select count(x) from a group by b;
 ```
-import 
+import
 ```
 
 
@@ -604,23 +611,3 @@ import
 
 ---
 56. 如何为一个Hadoop任务设置要创建reduder的数量？
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
