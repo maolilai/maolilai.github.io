@@ -1,3 +1,14 @@
+---
+layout: post
+title:  "因果推断笔记——python 倾向性匹配PSM实现示例（三）"
+date:   2022-02-02 20:16:01
+categories: 方法论
+tags: 大数据
+---
+
+
+转载自 腾讯云 
+
 因果推断笔记——python 倾向性匹配PSM实现示例（三）
 2021-12-07阅读 1400
 因果推断笔记—— 相关理论：Rubin Potential、Pearl、倾向性得分、与机器学习异同（二）
