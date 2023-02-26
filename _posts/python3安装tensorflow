@@ -1,0 +1,12 @@
+python3安装tensorflow
+
+pip3 install tensorflow==2.6  -i https://pypi.tuna.tsinghua.edu.cn/simple
+安装方法二
+
+https://www.codenong.com/cs108937468/
+#cpu版本： 
+pip install  tensorflow==1.14.0 或 
+pip install  tensorflow-cpu==1.14.0 (部分版本指定-cpu可能找不到)
+#gpu版本： 
+pip install  tensorflow-gpu==1.14.0
+pip install  tensorflow-gpu==1.14.0 --index-url https://pypi.tuna.tsinghua.edu.cn/simple
